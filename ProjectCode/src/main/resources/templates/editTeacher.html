@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+           xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>Date Teacher</title>
+</head>
+<body>
+<div class="container">
+<header th:replace="layouts/layout :: header"/>
+			<h2>Date Teacher</h2>
+ 	<a th:href="@{/teacher/list}" class="btn btn-primary">Back</a>
+ 	<br/>
+ 	<form th:action="@{/teacher/save}" method="post" th:object="${teacher}">
+ 	<br/>
+ 	<div class="form-group">
+ 	<label for="dni">Dni:</label>
+ 		<input type="text" class="form-control" name="dni" th:field="*{dni}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Error Dni</span>
+ 	</div>
+ 	<div class="form-group">		
+ 		<label for="name">Name:</label>
+ 		<input type="text" class="form-control" name="name" th:field="*{name}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Name</span>
+ 	</div> 
+ 	<div class="form-group">			
+ 		<label for="lastName">Last name:</label>
+ 		<input type="text" class="form-control" name="lastName" th:field="*{lastName}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error Last Name</span>
+ 		</div>  		
+ 		<label for="isActive">IsActive:</label>
+ 		<select name="isActive" th:field="*{isActive}" class="form-control">
+		    <option value="Y">Si</option>
+		    <option value="N">No</option>
+		</select>
+
+ 		<span th:if="${#fields.hasErrors('isActive')}" th:errors="*{isActive}">Error Is Active</span>
+ 		<br/> 		
+ 		
+ 		<button type="submit" class="btn btn-primary" >Save</button>
+ 	</form>
+
+<footer th:replace="layouts/layout :: footer"/>
+</div>
+</body>
+</html>

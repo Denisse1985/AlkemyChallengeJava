@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layouts/layout :: head">
+<meta charset="UTF-8">
+<title>Inicio</title>
+</head>
+<body>
+<div class="container">
+	<header th:replace="layouts/layout :: header"/>
+	
+<!-- 	<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{agregar}">[[#{persona.crear}]]</a> -->
+	<div class="card-deck">
+  <div class="card bg-primary" sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="card-body text-center">
+    <a class="nav-link text-white"   th:href="@{/course/list}">
+      <p class="card-text">Courses</p>
+      </a>
+    </div>
+  </div>
+  <div class="card bg-primary" sec:authorize="hasRole('ROLE_ADMIN')">
+    <div class="card-body text-center">
+    <a class="nav-link text-white"  th:href="@{/teacher/list}">
+      <p class="card-text">Teachers</p>
+      </a>
+    </div>
+  </div>
+  <div class="card bg-primary" sec:authorize="hasRole('ROLE_STUDENT')">
+    <div class="card-body text-center">
+    <a class="nav-link text-white"  th:href="@{/student}">
+      <p class="card-text">Student Portal</p>
+      </a>
+    </div>
+  </div>
+ </div>
+
+<footer th:replace="layouts/layout :: footer"/>
+</div>
+</body>
+</html>

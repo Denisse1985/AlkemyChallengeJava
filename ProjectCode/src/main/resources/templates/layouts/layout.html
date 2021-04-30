@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org" 
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plantilla</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/5.15.2/css/all.css" />
+	<script src="/webjars/jquery/3.4.0/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
+
+
+<!-- 	<link th:rel="stylessheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" /> -->
+<!-- 	<link th:rel="stylessheet" th:href="@{/webjars/font-awesome/css/all.css}" /> -->
+<!-- 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script> -->
+<!-- 	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script> -->
+<!-- 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script> -->
+</head>
+
+
+
+<body>
+  	<header th:fragmaent="header">
+  	<!-- Grey with black text -->
+<nav class="navbar navbar-expand-sm bg-dark p-0">
+  <ul sec:authorize="isAuthenticated()" class="navbar-nav">
+  	<li class="navbar-nav">
+  		<a href="#" class="nav-link" >Welcome  <span sec:authentication="name"></span></a>
+  	</li>
+  	<li class="navbar-nav">
+  		<span class="nav-link" > | </span>
+  	</li>
+    <li class="nav-item">
+      <a class="nav-link"  th:href="@{/home}">Home</a>
+    </li>
+    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+      <a class="nav-link"   th:href="@{/course/list}">Courses</a>
+    </li>
+    <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+      <a class="nav-link"  th:href="@{/teacher/list}">Teachers</a>
+    </li>
+     <li class="nav-item" sec:authorize="hasRole('ROLE_STUDENT')">
+      <a class="nav-link"  th:href="@{/student}">Students</a>
+    </li>
+    <li  class="nav-item">
+    	<form method="POST" th:action="@{/logout}">
+    		<a href="#" class="nav-link"  onclick="this.parentNode.submit();">Logout</a>
+    		<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+    	</form>
+    </li>
+ 
+  </ul>
+</nav>
+
+<br>
+	</header>
+    
+	<footer th:fragment="footer">
+	<div>
+       <br/>Dev: Denisse Vargas
+	</div>		
+	</footer>
+	
+</body>
+</html>

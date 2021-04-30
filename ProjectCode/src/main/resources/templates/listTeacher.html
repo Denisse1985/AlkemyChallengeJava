@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>List Teacher</title>
+</head>
+<body>
+<div class="container">
+<header th:replace="layouts/layout :: header"/>
+  		<h2>List Teacher</h2>
+  		<a th:href="@{add}" class="btn btn-primary">Add Teacher </a>
+  		<br><br>
+  		<div th:if="${teachers !=null and !teachers.empty}">
+  			<table class="table table-bordered  table-hover">
+           <thead class="thead-dark">
+  					<tr>
+  							<th>Dni </th>
+  							<th>Name</th>
+  							<th>Last Name</th>	
+  							<th>Is Active</th>	
+  							<th>Edit</th>			               
+  					</tr>
+  					</thead>
+  					<tbody>
+  					<tr th:each="teacher : ${teachers}"> 
+  						<td th:text="${teacher.dni}"> show dni</td>
+  						<td th:text="${teacher.name}"> show name</td>
+  						<td th:text="${teacher.lastName}"> show lastName</td>	
+  						<td th:text="${teacher.isActive}"> show isActive</td>		
+  						<td> <a th:href="@{/teacher/edit/} + ${teacher.dni}" th:text="Edit"  class="btn btn-success" /></td>
+							</tr>  
+							<tbody>				
+  			</table>
+  		</div>
+  		<div th:if="${teachers==null or teachers.empty}">
+  					list of teacher empty
+  		</div>
+<footer th:replace="layouts/layout :: footer"/>
+
+</body>
+</html>

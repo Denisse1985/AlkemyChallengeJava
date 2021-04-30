@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+           xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>Date Course</title>
+</head>
+<body>
+<div class="container">
+<header th:replace="layouts/layout :: header"/>
+			<h2>Date Course</h2>
+ 	<a th:href="@{/course/list}" class="btn btn-primary">Back</a>
+ 	<br/>
+ 	<form th:action="@{/course/save}" method="post" th:object="${course}">
+ 	<input type="hidden" name="idCourse" th:field="*{idCourse}"/> 	
+ 	<br/>
+ 	<div class="form-group">
+ 		<label for="name">Name:</label>
+ 		<input type="text" class="form-control" name="name" th:field="*{name}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Name</span>
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="description">Description:</label>
+ 		<textarea type="text" class="form-control" name="description" th:field="*{description}" required="false"></textarea>
+ 		<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error description</span>
+ 	</div> 	
+ 	<div class="form-group">
+ 		<label for="schedule">Schedule:</label>
+ 		<input type="text" class="form-control" name="schedule" th:field="*{schedule}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}">Error Schedule</span>
+ 		</div>	
+ 		<div class="form-group">
+ 		<label for="maximumQuota">Maximum Quota</label>
+ 		<input type="number" class="form-control" name="maximumQuota" th:field="*{maximumQuota}" required="true"/>
+ 		<span th:if="${#fields.hasErrors('maximumQuota')}" th:errors="*{maximumQuota}">Error Maximum Quota</span>
+ 	</div> 		
+ 	<div class="form-group">
+ 		<label for="teacher">Teacher</label>
+ 		<select name="teacher_dni" th:field="*{teacher.dni}" class="form-control">
+   			 <option th:each="teacher : ${teachers}" th:value="${teacher.dni}" th:text="${teacher.name} +' '+ ${teacher.lastName}"></option>
+		</select>
+ 		<span th:if="${#fields.hasErrors('teacher')}" th:errors="*{teacher}">Error Teacher</span>
+ 		 	</div> 		
+ 		<button type="submit" class="btn btn-primary" >Save</button>
+ 	</form>
+
+<footer th:replace="layouts/layout :: footer"/>
+</div>
+</body>
+</html>

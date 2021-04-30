@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>List Courses</title>
+</head>
+<body>
+<div class="container">
+<header th:replace="layouts/layout :: header"/>
+  		<h2>List Course</h2>
+  		<a th:href="@{add}" class="btn btn-primary">Add Course </a>
+  		<br><br>
+  		<div th:if="${courses !=null and !courses.empty}">
+  			<table class="table table-bordered  table-hover">
+  			<thead class="thead-dark">
+  					<tr>
+  							<th>Name </th>
+  							<th>Schedule</th>
+  							<th>Maximum Quota</th>
+  							<th>Available Quota</th>	
+  							<th>Edit</th>
+			                <th>Delete</th>
+  					</tr>
+  					</thead>
+  					<tbody>
+  					<tr th:each="course : ${courses}"> 
+  						<td th:text="${course.name}"> show name</td>
+  						<td th:text="${course.schedule}"> show schedule</td>
+  						<td th:text="${course.maximumQuota}"> show maximumQuota</td>	
+  						<td th:text="${course.availableQuota}"> show availableQuota</td>			
+  						<td> <a th:href="@{/course/edit/} + ${course.idCourse}" th:text="Edit"  class="btn btn-success"/></td>
+						<td> <a th:href="@{/course/delete (idCourse=${course.idCourse})}" th:text="Delete"  class="btn btn-danger"/></td>		
+  					</tr>
+  					</tbody>  				
+  			</table>
+  		</div>
+  		<div th:if="${courses==null or courses.empty}">
+  					list of course empty
+  		</div>
+<footer th:replace="layouts/layout :: footer"/>
+</div>
+</body>
+</html>

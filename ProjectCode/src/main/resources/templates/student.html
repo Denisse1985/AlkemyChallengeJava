@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<header th:replace="layouts/layout :: header" />
+		<div class="card bg-info text-white">
+			<div class="card-body">
+				<span> Name: </span> 
+				<span th:text="${student.name}"> </span>
+				<span th:text="${student.lastName}"> </span> 
+				<span>- Dni: </span> 
+				<span th:text="${student.dni}"> </span>
+			</div>
+		</div>
+		<br>
+
+
+		<h2>List Student Course</h2>
+		<a th:href="@{/studentCourse/list/} + ${student.dni}"
+			class="btn btn-primary">Add Student Course </a>
+</br></br>
+
+	<div th:if="${studentCourses !=null and !studentCourses.empty}">
+		<table class="table table-bordered  table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th>Course</th>
+					<th>Schedule</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="studentCourse : ${studentCourses}">
+					<td th:text="${studentCourse.course.name}">show course</td>
+					<td th:text="${studentCourse.course.schedule}">show schedule</td>
+					<td><a th:href="@{/studentCourse/delete (id=${studentCourse.id})}" th:text="Delete" class="btn btn-danger" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${studentCourses==null or studentCourses.empty}">list of student
+		course empty</div>
+
+	<footer th:replace="layouts/layout :: footer" />
+
+	</div>
+</body>
+</html>

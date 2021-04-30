@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+           xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layout :: head">
+<meta charset="ISO-8859-1">
+<title>Student Course</title>
+</head>
+<body>
+
+<header th:replace="layouts/layout :: header"/>
+			<h2>Student Course</h2>
+ 	<a th:href="@{/studentCourse/list}">Back</a>
+ 	<br/>
+ 	<form th:action="@{/studentCourse/save}" method="post" th:object="${studentCourse}">
+ 	<input type="hidden" name="id" th:field="*{id}"/> 	
+ 	<br/>
+ 		<label for="id">Id:</label>
+ 		<input type="text" name="id" th:field="*{id}"/>
+ 		<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Error Id</span>
+ 		<br/> 		
+ 		<label for="student">Student:</label>
+ 		<input type="text" name="student" th:field="*{student}"/>
+ 		<span th:if="${#fields.hasErrors('student')}" th:errors="*{student}">Error Student</span>
+ 		<br/> 		
+ 		<label for="course">Course</label>
+ 		<input type="number" name="course" th:field="*{course}"/>
+ 		<span th:if="${#fields.hasErrors('course')}" th:errors="*{course}">Error Course</span>
+ 		<br/> 		
+ 		<input type="submit" name="save" value="save"/>
+ 	</form>
+
+<footer th:replace="layouts/layout :: footer"/>
+
+</body>
+</html>
